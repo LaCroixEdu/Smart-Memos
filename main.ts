@@ -16,7 +16,7 @@ interface AudioPluginSettings {
 }
 
 let DEFAULT_SETTINGS: AudioPluginSettings = {
-	model: 'gpt-4-0613',
+	model: 'gpt-5.4-mini',
     apiKey: '',
 	prompt: 'You are an expert note-making AI for obsidian who specializes in the Linking Your Thinking (LYK) strategy.  The following is a transcription of recording of someone talking aloud or people in a conversation. There may be a lot of random things said given fluidity of conversation or thought process and the microphone\'s ability to pick up all audio.  Give me detailed notes in markdown language on what was said in the most easy-to-understand, detailed, and conceptual format.  Include any helpful information that can conceptualize the notes further or enhance the ideas, and then summarize what was said.  Do not mention \"the speaker\" anywhere in your response.  The notes your write should be written as if I were writting them. Finally, ensure to end with code for a mermaid chart that shows an enlightening concept map combining both the transcription and the information you added to it.  The following is the transcribed audio:\n\n',
     includeTranscript: true,
@@ -26,16 +26,7 @@ let DEFAULT_SETTINGS: AudioPluginSettings = {
 }
 
 const MODELS: string[] = [
-	'gpt-3.5-turbo-16k',
-	'gpt-3.5-turbo-0613',
-	'text-davinci-003',
-	'text-davinci-002',
-	'code-davinci-002',
-	'code-davinci-001',
-	'gpt-4-0613',
-	'gpt-4-32k-0613',
-	'gpt-4o',
-    'gpt-4o-mini'
+	'gpt-5.4-mini'
 ];
   
 
@@ -44,7 +35,7 @@ export default class SmartMemosPlugin extends Plugin {
 	writing: boolean;
 	transcript: string;
 	apiKey: string = 'sk-as123mkqwenjasdasdj12...';
-    model: string = 'gpt-4-0613';
+    model: string = 'gpt-5.4-mini';
 
     appJsonObj : any;
 
@@ -526,6 +517,10 @@ export default class SmartMemosPlugin extends Plugin {
 
 	async loadSettings() {
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+		// Migrate any removed legacy model values to the current default
+		if (!MODELS.includes(this.settings.model)) {
+			this.settings.model = DEFAULT_SETTINGS.model;
+		}
 	}
 
 	async saveSettings() {

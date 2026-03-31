@@ -16,7 +16,7 @@ Welcome to the Smart Memos! This plugin integrates seamlessly with your Obsidian
 Getting started with the Smart Memos Plugin is easy. Follow these steps to install:
 
 1. Download and install the Smart Memos Plugin from the Obsidian Community Plugins.
-2. Configure the plugin settings with your OpenAI API Key and preferred AI model.
+2. Configure the plugin settings with your OpenAI API Key.
 
 **Note** This plugin currently uses online openAI models to recieve and transcribe your voice memos.  Looking to add Local AI Models in the near future. OpenAI's retention policy retains text up to 30 days, but does not retain any audio data. 
 
